@@ -8,6 +8,8 @@
 -Routing of app
 -Login form
 -Sign up form
+-Form validation
+-UseRef hook 
 
 #Features:
 -Login/Sign Up
