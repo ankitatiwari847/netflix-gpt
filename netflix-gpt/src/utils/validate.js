@@ -1,6 +1,5 @@
 export const emailValidate = (email) => {
   let isEmailValid = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
-  console.log(email, isEmailValid);
 
   if (!isEmailValid) return "Email ID not valid";
   return null;

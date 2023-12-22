@@ -1,18 +1,27 @@
 import { useRef, useState } from "react";
-import Header from "./Header";
+import { auth } from "../utils/firebase";
 import {
-  emailValidate,
-  passwordValidate,
-  nameValidate,
-} from "../utils/validate";
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import Header from "./Header";
+import { emailValidate, passwordValidate } from "../utils/validate";
+import { useNavigate } from "react-router-dom";
+import { updateProfile } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
   //Shows if user has already signed up take to sign in page
   const [isSignedUp, setIsSignedUp] = useState(true);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [errorMessage, setErrorMessage] = useState({
-    emailError: "",
-    passwordError: "",
-    nameError: "",
+    emailError: null,
+    passwordError: null,
+    nameError: null,
+    authError: null,
   });
   const email = useRef(null);
   const password = useRef(null);
@@ -26,7 +35,13 @@ const Login = () => {
     e.preventDefault();
     let emailError = emailValidate(email?.current?.value);
     let passwordError = passwordValidate(password?.current?.value);
-    let nameError = name?.current?.value ? null : "Please enter name";
+
+    //Set name error null if its a signIn page
+    let nameError = name?.current?.value
+      ? null
+      : isSignedUp
+      ? null
+      : "Please enter name";
 
     setErrorMessage({
       ...errorMessage,
@@ -35,7 +50,94 @@ const Login = () => {
       nameError: nameError,
     });
 
-    console.log(errorMessage);
+    //console.log(!isSignedUp, errorMessage);
+
+    if (
+      (!isSignedUp &&
+        (errorMessage.passwordError ||
+          errorMessage.nameError ||
+          errorMessage.nameError)) ||
+      errorMessage.passwordError ||
+      errorMessage.nameError
+    )
+      return;
+
+    //signIn && signUp logic
+    if (isSignedUp) {
+      //SignIn auth logic
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          if (errorMessage.authError) {
+            setErrorMessage({
+              ...errorMessage,
+              authError: null,
+            });
+          }
+
+          navigate("/browse");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMsg = error.message;
+          setErrorMessage({
+            ...errorMessage,
+            authError: errorCode + "-" + errorMsg,
+          });
+          console.log(errorCode + "-" + errorMsg);
+        });
+    } else {
+      //SignUp auth logic
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+
+          //Show error if any
+          if (errorMessage.authError) {
+            setErrorMessage({
+              ...errorMessage,
+              authError: null,
+            });
+          }
+
+          //Update display name and user image
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL:
+              "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png",
+          })
+            .then(() => {
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(addUser({ uid, email, displayName, photoURL }));
+              navigate("/browse");
+            })
+            .catch((error) => {
+              setErrorMessage({
+                ...errorMessage,
+                authError: null,
+              });
+            });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMsg = error.message;
+          setErrorMessage({
+            ...errorMessage,
+            authError: errorCode + "-" + errorMsg,
+          });
+          console.log(errorCode + "-" + errorMsg);
+        });
+    }
   };
 
   return (
@@ -47,13 +149,18 @@ const Login = () => {
             {isSignedUp ? "Sign In" : "Sign Up"}
           </h2>
 
+          {errorMessage?.authError && (
+            <p className="text-red-700 font-semibold mb-2">
+              {errorMessage?.authError}
+            </p>
+          )}
           <form className="flex justify-center column flex-col items-center">
             {!isSignedUp && (
               <div className="mb-4 w-full">
                 <input
                   type="text"
                   ref={name}
-                  className="bg-[#333] h-12 rounded-md w-full py-3 pl-3 focus:text-white"
+                  className="bg-[#333] h-12 rounded-md w-full py-3 pl-3 focus:text-white text-white"
                   placeholder="Name"
                 />
                 {errorMessage?.nameError && (
