@@ -16,7 +16,17 @@
 -Use onAuthStateChanged for dispatch on user signup / signin / signout or any other authentication state change (instead of dispatching actions on all the components on signin,signup,signout).
 -writing onAuthStateChanged on body/app, and we want to call it only once so useeffect
 -Implemnet signout
--Fetch movie data from tmdb api
+-Bug fix: Redirect user to browser if user is logedin (/ => /browse) and vice versa
+-Unsubscribe to the onAuthStateChanged callback
+-Fetch movie data from TMDB api (login -> edit profile -> API -> get ur api key & access token)
+-Fetch now playing movie data
+-Push the data in appStore in moviesSlice
+-Use TMDB movie video for trailers, and make an api call using the movieId
+-in store update movieTrailer using addMovieTrailer action
+
+- In youtube on save option copy iframe code make it autoplay and mute.
+- Use your trailer id in iframe.
+  -Get the trailer id from store in videoBackground
 
 #Features:
 -Login/Sign Up
@@ -24,3 +34,5 @@
 -redirect to browser page
 -Signout
 -Fetch from tmdb api
+-movie slice
+-Browse page

@@ -6,15 +6,14 @@ import {
 } from "firebase/auth";
 import Header from "./Header";
 import { emailValidate, passwordValidate } from "../utils/validate";
-import { useNavigate } from "react-router-dom";
 import { updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import Footer from "./Footer";
 
 const Login = () => {
   //Shows if user has already signed up take to sign in page
   const [isSignedUp, setIsSignedUp] = useState(true);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [errorMessage, setErrorMessage] = useState({
@@ -50,8 +49,6 @@ const Login = () => {
       nameError: nameError,
     });
 
-    //console.log(!isSignedUp, errorMessage);
-
     if (
       (!isSignedUp &&
         (errorMessage.passwordError ||
@@ -79,8 +76,6 @@ const Login = () => {
               authError: null,
             });
           }
-
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -119,7 +114,6 @@ const Login = () => {
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
               dispatch(addUser({ uid, email, displayName, photoURL }));
-              navigate("/browse");
             })
             .catch((error) => {
               setErrorMessage({
@@ -160,7 +154,7 @@ const Login = () => {
                 <input
                   type="text"
                   ref={name}
-                  className="bg-[#333] h-12 rounded-md w-full py-3 pl-3 focus:text-white text-white"
+                  className="bg-[#333] h-12 rounded-md w-full py-3 pl-3 focus:text-white text-white z-12"
                   placeholder="Name"
                 />
                 {errorMessage?.nameError && (
@@ -226,6 +220,7 @@ const Login = () => {
           )}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
