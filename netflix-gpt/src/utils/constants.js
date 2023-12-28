@@ -35,3 +35,6 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "hindi", name: "Hindi" },
   { identifier: "spanish", name: "Spanish" },
 ];
+
+export const HAMBURGER_MENU =
+  "https://th.bing.com/th/id/R.99c4413d03608e9202612095d8144adb?rik=GHMt%2bwxYBlpTLA&riu=http%3a%2f%2f21thirteen.com%2fwp-content%2fuploads%2f2016%2f03%2fhamburger-menu.jpg&ehk=mHI5o%2fJMLmNuPlPD8j%2fpgFn5MOlzhK3lF4nBK%2f6BvJc%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1";

@@ -9,9 +9,11 @@ import useUpcomingMovies from "./hooks/usePopularMovies copy";
 import Footer from "./Footer";
 import GPTSearch from "./GPTSearch";
 import { useSelector } from "react-redux";
+import HamburgerMenu from "./HamburgerMenu";
 
 const Browse = () => {
   const showGptSearch = useSelector((store) => store.gptSearch.showGptSearch);
+  const showHamburger = useSelector((store) => store.config.showHamburgerMenu);
   useNowPlayingMovies();
   usePopularMovies();
   useTopRatedMovies();
@@ -20,6 +22,7 @@ const Browse = () => {
   return (
     <div>
       <Header />
+      {showHamburger && <HamburgerMenu />}
       <div>
         {showGptSearch ? (
           <GPTSearch />
