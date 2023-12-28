@@ -5,11 +5,11 @@ export const VideoTitle = ({ title, overview }) => {
   //fetch trailer video using the movie id
   return (
     <div className="text-white w-screen aspect-video md:pt-[20%] pt-[20%] absolute md:pl-12 pl-4 bg-gradient-to-tr from-black">
-      <div className="md:w-4/12 w-8/12">
-        <h1 className="md:font-extrabold md:text-4xl font-medium text-base">
+      <div className="md:w-3/12 w-8/12">
+        <h1 className="md:font-bold md:text-3xl font-medium text-base">
           {title}
         </h1>
-        <p className="md:mt-6 md:font-semibold md:text-lg md:line-clamp-3 mt-1 text-xs line-clamp-1">
+        <p className="md:mt-6 md:font-medium md:text-base md:line-clamp-3 mt-1 text-xs line-clamp-1">
           {overview}
         </p>
         <div className="flex md:py-4 py-1">

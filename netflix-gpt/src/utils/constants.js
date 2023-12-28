@@ -29,3 +29,9 @@ export const API_OPTIONS = {
       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlZjZkNzFlZDU3MzAyZDFiZWZiZGNhZmRiNGY5MmU3YyIsInN1YiI6IjY1ODllZGFlZGQyNTg5NzIwMjZiYWRlMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.VIGeGux3t-OxqWnPc8ShAOEsRY-DGwQt0zv8ouDvk-Q",
   },
 };
+
+export const SUPPORTED_LANGUAGES = [
+  { identifier: "en", name: "English" },
+  { identifier: "hindi", name: "Hindi" },
+  { identifier: "spanish", name: "Spanish" },
+];

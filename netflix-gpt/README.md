@@ -28,6 +28,17 @@
 - Use your trailer id in iframe.
   -Get the trailer id from store in videoBackground
 
+  -Create a GPTSearch button
+  -create gptSearch component, use it in Browse component-> show on if the in store showGPTSeearch is true.
+  -Create a slice for GPTSlice -> toggleGptSearchView toggle action
+  -on gpt search bitton dispatch action toggleGptSearchView
+  -call GPTSearchBar and GPTSearchSuggestion in GPTSearch
+  -in for multilangiuage support create languageConstant.js file
+  in header create language dropdown select box
+  -store language data in redux store in a config slice. create an action and dispatch it on select language. and update the lang in config slice.
+  -Show lang select on showGptSearch is true
+  -if already on gptSearcxh page the gpt button will show "home" instead of "gpt search"
+
 #Features:
 -Login/Sign Up
 -Sign In/ Sign Up Form
