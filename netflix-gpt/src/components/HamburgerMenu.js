@@ -2,8 +2,6 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleHamburgerMenu } from "../utils/configSlice";
 import { LOGO } from "../utils/constants";
-import GPTSearch from "./GPTSearch";
-import GPTSearchBar from "./GPTSearchBar";
 import { toggleGPTSearchView } from "../utils/gptSlice";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router";
@@ -11,6 +9,7 @@ import { signOut } from "firebase/auth";
 
 const HamburgerMenu = () => {
   const menuOpen = useSelector((store) => store.config.showHamburgerMenu);
+  const showGptSearch = useSelector((store) => store.gptSearch.showGptSearch);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleClose = () => {
@@ -19,6 +18,7 @@ const HamburgerMenu = () => {
 
   const handleGptSearch = () => {
     dispatch(toggleGPTSearchView());
+    handleClose();
   };
 
   const handleSignOut = () => {
@@ -31,6 +31,7 @@ const HamburgerMenu = () => {
 
   return (
     <div
+      id="menu"
       className={
         "bg-white absolute w-full h-full" +
         (menuOpen ? " menu-open " : "menu-close") +
@@ -54,9 +55,12 @@ const HamburgerMenu = () => {
           onClick={handleGptSearch}
           className="py-2 px-4 mx-4 my-2 bg-purple-800 text-white rounded-lg"
         >
-          GPT Search
+          {showGptSearch ? "Homepage" : "GPT Search"}
         </button>
-        <button onClick={handleSignOut} className="text-black font-semibold">
+        <button
+          onClick={handleSignOut}
+          className="text-black font-semibold my-3"
+        >
           Signout
         </button>
       </div>

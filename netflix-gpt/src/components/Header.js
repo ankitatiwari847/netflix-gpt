@@ -73,7 +73,7 @@ const Header = () => {
   return (
     <div className="absolute md:w-screen max-sm:px-2 px-8 py-2 md:bg-gradient-to-b md:from-black z-10 md:h-30 flex justify-between">
       <div className="flex ">
-        {isMobile && (
+        {isMobile && user && (
           <button
             onClick={handleHamburgerMenu}
             className="text-white transition-all duration-800 -left-36"
@@ -104,7 +104,7 @@ const Header = () => {
               onClick={handleGptSearch}
               className="py-2 px-4 mx-4 my-2 bg-purple-800 text-white rounded-lg"
             >
-              GPT Search
+              {showGptSearch ? "Homepage" : "GPT Search"}
             </button>
           </div>
           <div className="relative inline-block">
