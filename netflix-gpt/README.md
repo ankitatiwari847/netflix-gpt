@@ -39,6 +39,18 @@
   -Show lang select on showGptSearch is true
   -if already on gptSearcxh page the gpt button will show "home" instead of "gpt search"
 
+  -Create secret key in platform openai, free for 3 months then charged.
+  -Use the key in constant.js file in ur project
+  -Install npm openai - This library provides convenient access to the OpenAI REST API from TypeScript or JavaScript.
+  -Setup open Ai in a new util file
+  -make open ai api call on search, also write a very specific query
+  -based on the movie name results given by open ai, serach the data on tmdb search api
+  -I will give me array of arrays of different movies
+  -Store the movies in store
+
+  -private keys should be stored in .env file instead of constant file.
+  ex: REACT_APP_API_KEY = "<link here>"
+
 #Features:
 -Login/Sign Up
 -Sign In/ Sign Up Form

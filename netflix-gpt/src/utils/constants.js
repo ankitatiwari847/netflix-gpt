@@ -25,8 +25,7 @@ export const API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlZjZkNzFlZDU3MzAyZDFiZWZiZGNhZmRiNGY5MmU3YyIsInN1YiI6IjY1ODllZGFlZGQyNTg5NzIwMjZiYWRlMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.VIGeGux3t-OxqWnPc8ShAOEsRY-DGwQt0zv8ouDvk-Q",
+    Authorization: "Bearer " + process.env.REACT_APP_TMDB_KEY,
   },
 };
 
@@ -36,7 +35,7 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "spanish", name: "Spanish" },
 ];
 
-export const OPENAI_KEY = "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";
+export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY;
 
 export const HAMBURGER_MENU =
   "https://th.bing.com/th/id/R.99c4413d03608e9202612095d8144adb?rik=GHMt%2bwxYBlpTLA&riu=http%3a%2f%2f21thirteen.com%2fwp-content%2fuploads%2f2016%2f03%2fhamburger-menu.jpg&ehk=mHI5o%2fJMLmNuPlPD8j%2fpgFn5MOlzhK3lF4nBK%2f6BvJc%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1";

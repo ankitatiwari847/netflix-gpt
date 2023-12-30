@@ -1,11 +1,16 @@
 import React from "react";
 import { IMG_CDN } from "../utils/constants";
+import { useNavigate } from "react-router";
 
-const MovieCard = ({ title, poster }) => {
+const MovieCard = ({ title, poster, id }) => {
+  const navigate = useNavigate();
+  const handleMovieClick = () => {
+    navigate("/movie/" + id);
+  };
   return (
     <>
       {poster && (
-        <div className="w-64 h-44 mr-4 relative">
+        <div className="w-64 h-44 mr-4 relative " onClick={handleMovieClick}>
           <img
             className="object-cover rounded-md"
             src={IMG_CDN + poster}

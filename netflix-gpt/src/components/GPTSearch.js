@@ -4,7 +4,7 @@ import GPTSearchSuggestions from "./GPTSearchSuggestions";
 
 const GPTSearch = () => {
   return (
-    <div>
+    <div className="relative">
       <GPTSearchBar />
       <GPTSearchSuggestions />
     </div>
