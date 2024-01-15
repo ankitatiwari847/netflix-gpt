@@ -1,7 +1,13 @@
 import React from "react";
 import { PLAY } from "../utils/constants";
+import { useNavigate } from "react-router";
 
-export const VideoTitle = ({ title, overview }) => {
+export const VideoTitle = ({ title, overview, movieId }) => {
+  const navigate = useNavigate();
+  const handleMovieClick = () => {
+    navigate("/movie/" + movieId);
+  };
+
   //fetch trailer video using the movie id
   return (
     <div className="text-white w-screen aspect-video md:pt-[20%] pt-[20%] absolute md:pl-12 pl-4 bg-gradient-to-tr from-black">
@@ -13,11 +19,17 @@ export const VideoTitle = ({ title, overview }) => {
           {overview}
         </p>
         <div className="flex md:py-4 py-1">
-          <button className="bg-white text-black flex justify-center md:px-5 px-2 md:py-2 py-1 rounded-md md:font-bold font-semibold items-center mr-2">
+          <button
+            onClick={handleMovieClick}
+            className="bg-white text-black flex justify-center md:px-5 px-2 md:py-2 py-1 rounded-md md:font-bold font-semibold items-center mr-2"
+          >
             <img className="md:h-8 h-4 pr-1" src={PLAY} alt="play" />
             Play
           </button>
-          <button className="bg-gray-700 text-white flex justify-center md:px-5 px-2 md:py-2 py-2 rounded-md md:font-bold font-semibold items-center">
+          <button
+            onClick={handleMovieClick}
+            className="bg-gray-700 text-white flex justify-center md:px-5 px-2 md:py-2 py-2 rounded-md md:font-bold font-semibold items-center"
+          >
             More Info
           </button>
         </div>

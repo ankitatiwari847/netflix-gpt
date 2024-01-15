@@ -14,6 +14,7 @@ const MainContainer = () => {
       <VideoTitle
         title={mainMovie.original_title}
         overview={mainMovie.overview}
+        movieId={mainMovie.id}
       />
       <VideoBackground movieId={mainMovie.id} />
     </div>

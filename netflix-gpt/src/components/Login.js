@@ -5,7 +5,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import Header from "./Header";
-import { emailValidate, passwordValidate } from "../utils/validate";
+import ValidateInput from "../utils/validate";
 import { updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
@@ -14,14 +14,9 @@ import Footer from "./Footer";
 const Login = () => {
   //Shows if user has already signed up take to sign in page
   const [isSignedUp, setIsSignedUp] = useState(true);
+  const [errorMsg, setErrorMsg] = useState(null);
+  const [authError, setAuthError] = useState(null);
   const dispatch = useDispatch();
-
-  const [errorMessage, setErrorMessage] = useState({
-    emailError: null,
-    passwordError: null,
-    nameError: null,
-    authError: null,
-  });
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
@@ -32,30 +27,22 @@ const Login = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    let emailError = emailValidate(email?.current?.value);
-    let passwordError = passwordValidate(password?.current?.value);
+    let error = ValidateInput(
+      email?.current?.value,
+      password?.current?.value,
+      name?.current?.value,
+      isSignedUp
+    );
 
-    //Set name error null if its a signIn page
-    let nameError = name?.current?.value
-      ? null
-      : isSignedUp
-      ? null
-      : "Please enter name";
-
-    setErrorMessage({
-      ...errorMessage,
-      emailError: emailError,
-      passwordError: passwordError,
-      nameError: nameError,
-    });
+    setErrorMsg(error);
 
     if (
-      (!isSignedUp &&
-        (errorMessage.passwordError ||
-          errorMessage.nameError ||
-          errorMessage.nameError)) ||
-      errorMessage.passwordError ||
-      errorMessage.nameError
+      error
+      // (!isSignedUp &&
+      //   errorMessage.passwordError &&
+      //   errorMessage.nameError &&
+      //   errorMessage.nameError) ||
+      // (errorMessage.passwordError && errorMessage.nameError)
     )
       return;
 
@@ -70,21 +57,17 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          if (errorMessage.authError) {
-            setErrorMessage({
-              ...errorMessage,
-              authError: null,
-            });
-          }
+          // if (errorMessage.authError) {
+          //   setErrorMessage({
+          //     ...errorMessage,
+          //     authError: null,
+          //   });
+          // }
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMsg = error.message;
-          setErrorMessage({
-            ...errorMessage,
-            authError: errorCode + "-" + errorMsg,
-          });
-          console.log(errorCode + "-" + errorMsg);
+          setAuthError(errorMsg);
         });
     } else {
       //SignUp auth logic
@@ -97,14 +80,6 @@ const Login = () => {
           // Signed up
           const user = userCredential.user;
 
-          //Show error if any
-          if (errorMessage.authError) {
-            setErrorMessage({
-              ...errorMessage,
-              authError: null,
-            });
-          }
-
           //Update display name and user image
           updateProfile(user, {
             displayName: name.current.value,
@@ -116,19 +91,13 @@ const Login = () => {
               dispatch(addUser({ uid, email, displayName, photoURL }));
             })
             .catch((error) => {
-              setErrorMessage({
-                ...errorMessage,
-                authError: null,
-              });
+              setAuthError(error.message);
+              console.log(error);
             });
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMsg = error.message;
-          setErrorMessage({
-            ...errorMessage,
-            authError: errorCode + "-" + errorMsg,
-          });
           console.log(errorCode + "-" + errorMsg);
         });
     }
@@ -143,10 +112,11 @@ const Login = () => {
             {isSignedUp ? "Sign In" : "Sign Up"}
           </h2>
 
-          {errorMessage?.authError && (
-            <p className="text-red-700 font-semibold mb-2">
-              {errorMessage?.authError}
-            </p>
+          {errorMsg && (
+            <p className="text-red-700 font-semibold mb-2">{errorMsg}</p>
+          )}
+          {authError && (
+            <p className="text-red-700 font-semibold mb-2">{authError}</p>
           )}
           <form className="flex justify-center column flex-col items-center">
             {!isSignedUp && (
@@ -157,11 +127,6 @@ const Login = () => {
                   className="bg-[#333] h-12 rounded-md w-full py-3 pl-3 focus:text-white text-white z-12"
                   placeholder="Name"
                 />
-                {errorMessage?.nameError && (
-                  <p className="text-red-700 font-semibold">
-                    {errorMessage?.nameError}
-                  </p>
-                )}
               </div>
             )}
             <div className="mb-4 w-full">
@@ -171,11 +136,6 @@ const Login = () => {
                 className="bg-[#333] h-12 rounded-md w-full py-3 pl-3 focus:text-white text-white"
                 placeholder="Email"
               />
-              {errorMessage?.emailError && (
-                <p className="text-red-700 font-semibold">
-                  {errorMessage?.emailError}
-                </p>
-              )}
             </div>
             <div className="mb-4 w-full">
               <input
@@ -184,17 +144,12 @@ const Login = () => {
                 className="bg-[#333] h-12 rounded-md w-full py-3 pl-3 focus:text-white text-white"
                 placeholder="Password"
               />
-              {errorMessage?.passwordError && (
-                <p className="text-red-700 font-semibold">
-                  {errorMessage?.passwordError}
-                </p>
-              )}
             </div>
             <button
               onClick={(e) => {
                 handleFormSubmit(e);
               }}
-              className="text-white rounded-md my-5 w-full bg-[#e50914] py-3 focus:text-white text-white"
+              className="text-white rounded-md my-5 w-full bg-[#e50914] py-3 focus:text-white"
             >
               {isSignedUp ? "Sign In" : "Sign Up"}
             </button>
