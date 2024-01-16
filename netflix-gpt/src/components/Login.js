@@ -25,6 +25,14 @@ const Login = () => {
     setIsSignedUp(!isSignedUp);
   };
 
+  const errorMessage = {
+    "auth/invalid-credential": "Invalid Credentials",
+    "auth/invalid-display-name": "Invalid Display Name",
+    "auth/invalid-password": "Invalid Password",
+    "auth/email-already-exists": "Email already taked",
+    default: "Something went wrong, please try again",
+  };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     let error = ValidateInput(
@@ -66,8 +74,8 @@ const Login = () => {
         })
         .catch((error) => {
           const errorCode = error.code;
-          const errorMsg = error.message;
-          setAuthError(errorMsg);
+          // const errorMsg = error.message;
+          setAuthError(errorMessage[errorCode ? errorCode : "default"]);
         });
     } else {
       //SignUp auth logic
@@ -91,14 +99,13 @@ const Login = () => {
               dispatch(addUser({ uid, email, displayName, photoURL }));
             })
             .catch((error) => {
-              setAuthError(error.message);
-              console.log(error);
+              const errorCode = error.code;
+              setAuthError(errorMessage[errorCode ? errorCode : "default"]);
             });
         })
         .catch((error) => {
           const errorCode = error.code;
-          const errorMsg = error.message;
-          console.log(errorCode + "-" + errorMsg);
+          setAuthError(errorMessage[errorCode ? errorCode : "default"]);
         });
     }
   };
@@ -126,6 +133,10 @@ const Login = () => {
                   ref={name}
                   className="bg-[#333] h-12 rounded-md w-full py-3 pl-3 focus:text-white text-white z-12"
                   placeholder="Name"
+                  onMouseUpCapture={() => {
+                    setErrorMsg(null);
+                    setAuthError(null);
+                  }}
                 />
               </div>
             )}
@@ -135,6 +146,10 @@ const Login = () => {
                 ref={email}
                 className="bg-[#333] h-12 rounded-md w-full py-3 pl-3 focus:text-white text-white"
                 placeholder="Email"
+                onMouseUpCapture={() => {
+                  setErrorMsg(null);
+                  setAuthError(null);
+                }}
               />
             </div>
             <div className="mb-4 w-full">
@@ -143,6 +158,10 @@ const Login = () => {
                 ref={password}
                 className="bg-[#333] h-12 rounded-md w-full py-3 pl-3 focus:text-white text-white"
                 placeholder="Password"
+                onMouseUpCapture={() => {
+                  setErrorMsg(null);
+                  setAuthError(null);
+                }}
               />
             </div>
             <button

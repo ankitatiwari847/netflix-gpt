@@ -107,7 +107,7 @@ const Header = () => {
               {showGptSearch ? "Homepage" : "GPT Search"}
             </button>
           </div>
-          <div className="relative inline-block">
+          <div className="relative inline-block mr-4">
             <img
               onClick={handleUserDropDown}
               src={user?.photoURL ? user?.photoURL : USER_AVATAR}
@@ -117,7 +117,7 @@ const Header = () => {
             <div className={"bg-black p-2 absolute z-13  " + showDropDown}>
               <ul>
                 <li className="text-white">
-                  {user?.displayName ? "Hi!" + user.displayName : "Hello"}
+                  {user?.displayName ? "Hi! " + user.displayName : "Hello"}
                 </li>
                 <li>
                   <button onClick={handleSignOut} className="text-white">

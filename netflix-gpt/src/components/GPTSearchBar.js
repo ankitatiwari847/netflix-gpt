@@ -3,7 +3,7 @@ import lang from "../utils/langConstant";
 import { useRef } from "react";
 import openai from "../utils/openai";
 import { API_OPTIONS } from "../utils/constants";
-import { addGPTMovieResult } from "../utils/gptSlice";
+import { addGPTMovieResult, setIsLoading } from "../utils/gptSlice";
 
 const GPTSearchBar = () => {
   const langKey = useSelector((store) => store.config.lang);
@@ -33,25 +33,25 @@ const GPTSearchBar = () => {
       messages: [{ role: "user", content: gptQuery }],
       model: "gpt-3.5-turbo",
     });
-
     if (!GPTResult?.choices) {
       //TODO: write error handling
     }
 
     const gptSearchMovieResult =
       GPTResult.choices?.[0]?.message?.content.split(",");
-    //console.log(gptSearchMovieResult);
     //For each movie find tmbd api
 
     const SearchPromiseArray = gptSearchMovieResult.map((movie) =>
       searchMovieTMDB(movie)
     );
+
     //[promise, promise, promise...........]
     //we will get an array of promises, bcz gptSearchMovieResult is an async function, it will take some time to give result.
 
     //when all the promises will be resolved it will give data in tmdbSearchData
     const tmdbSearchData = await Promise.all(SearchPromiseArray);
 
+    dispatch(setIsLoading());
     dispatch(
       addGPTMovieResult({
         movieNames: gptSearchMovieResult,
@@ -65,7 +65,10 @@ const GPTSearchBar = () => {
       <div className="pt-[30%] md:pt-[10%] flex justify-center">
         <form
           className="w-full md:w-1/2 grid grid-cols-12 bg-black m-1"
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={(e) => {
+            e.preventDefault();
+            dispatch(setIsLoading());
+          }}
         >
           <input
             className=".md:p-4 md:m-4 md:col-span-9 md:text-base col-span-8 p-2 m-1"

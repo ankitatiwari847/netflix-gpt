@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { VideoBackground } from "./VideoBackground";
-import { API_OPTIONS } from "../utils/constants";
+import { API_OPTIONS, CROSS_ICON } from "../utils/constants";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 const MovieView = () => {
   const { id } = useParams();
@@ -25,7 +26,14 @@ const MovieView = () => {
   }, []);
 
   return (
-    <div>
+    <div className="relative">
+      <Link to={"/browse"}>
+        <img
+          className="absolute bg-white h-10 top-3 right-4 rounded-3xl"
+          src={CROSS_ICON}
+          alt="cancel"
+        />
+      </Link>
       <VideoBackground movieId={id} />
       <div className="bg-black text-white">
         <p className="font-bold text-xl">{movieDetails?.title}</p>

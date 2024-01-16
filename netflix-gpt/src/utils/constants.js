@@ -21,6 +21,9 @@ export const TWIITER_ICON =
 export const FACEBOOK_ICON =
   "https://th.bing.com/th/id/R.be020676015c8a44e939a98b749f57ec?rik=G5WHj9gQjQWe5Q&riu=http%3a%2f%2fwww.pngplay.com%2fwp-content%2fuploads%2f3%2fBlack-Facebook-Logo-Transparent-Background.png&ehk=tn%2fIqVpltjxvL8WsEMtQGKzEDDP196keGxUDi35Eh7I%3d&risl=&pid=ImgRaw&r=0";
 
+export const CROSS_ICON =
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Cancel_icon.svg/563px-Cancel_icon.svg.png?20180116193235";
+
 export const API_OPTIONS = {
   method: "GET",
   headers: {
