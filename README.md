@@ -66,7 +66,7 @@ Fork this repository.\
 Create a new branch for your feature using git checkout -b <feature-name>.\
 Develop your feature and commit your changes using git commit -m "<commit-message>".\
 Push your changes to your fork using git push origin <feature-name>.\
-Create a new pull request.\
+Create a new pull request.
 
 Attached screeshots.
 
