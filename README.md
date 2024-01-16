@@ -26,11 +26,22 @@ Netflix-GPT includes the following features:
 
 Form Handling: Password should be mixed with numbers, special characters, uppercase, must be of length 8, and a valid email ID.
 Netflix Login and Signup Page: Seamlessly access your personalized Netflix-GPT experience with secure login and signup functionalities.
+
 [![Screenshot-netflix-GPT-login.png](https://i.postimg.cc/mr0Tq484/Screenshot-netflix-GPT-login.png)](https://postimg.cc/kVvr6k0Y)
 
 Netflix Landing Page
+
 GPT-SEARCH Button: Harnessing the power of OpenAI for intelligent movie recommendations. Let the magic of GPT enhance your entertainment choices!
+
+[![Screenshot-netflix-GPT-Browse.png](https://i.postimg.cc/Z58gZSbZ/Screenshot-netflix-GPT-Browse.png)](https://postimg.cc/NK0b7Z2P)
+
+[![Screenshot-netflix-GPT-List.png](https://i.postimg.cc/bwrTVfZ3/Screenshot-netflix-GPT-List.png)](https://postimg.cc/VJyn5TBC)
+
 Movie Search Button: Dive into a separate search page designed for efficient and effortless movie exploration.
+
+[![Screenshot-2024-01-16-092136.png](https://i.postimg.cc/LXpjpcsd/Screenshot-2024-01-16-092136.png)](https://postimg.cc/cKFv75YT)
+
+[![Screenshot-2024-01-16-092224.png](https://i.postimg.cc/s2w3jSjV/Screenshot-2024-01-16-092224.png)](https://postimg.cc/TyLzQK5S)
 
 **Installation**
 To install and run Netflix-GPT, follow these steps:
