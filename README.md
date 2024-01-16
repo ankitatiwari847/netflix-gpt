@@ -24,12 +24,12 @@ Netflix-GPT is designed to be responsive,works well with mobile and desktop/PC.
 **Key Features**\
 Netflix-GPT includes the following features:
 
-Form Handling: Password should be mixed with numbers, special characters, uppercase, must be of length 8, and a valid email ID.\
-Netflix Login and Signup Page: Seamlessly access your personalized Netflix-GPT experience with secure login and signup functionalities.
+Login and Signup Page: You can access your personalized Netflix-GPT experience with secure login and signup functionalities on the Login and Signup Page.
+Password should have numbers, special characters, uppercase, must be of length 8, and a valid email ID.
 
 [![Screenshot-netflix-GPT-login.png](https://i.postimg.cc/mr0Tq484/Screenshot-netflix-GPT-login.png)](https://postimg.cc/kVvr6k0Y)
 
-Netflix Landing Page
+Landing Page.The Landing Page provides an category wise list of the latest movies and movie preview playing in background.
 
 GPT-SEARCH Button: Harnessing the power of OpenAI for intelligent movie recommendations. Let the magic of GPT enhance your entertainment choices!
 
@@ -37,7 +37,7 @@ GPT-SEARCH Button: Harnessing the power of OpenAI for intelligent movie recommen
 
 [![Screenshot-netflix-GPT-List.png](https://i.postimg.cc/bwrTVfZ3/Screenshot-netflix-GPT-List.png)](https://postimg.cc/VJyn5TBC)
 
-Movie Search Button: Dive into a separate search page designed for efficient and effortless movie exploration.
+Movie Search Button: The Movie Search Button allows you to dive into a separate search page designed for efficient and effortless movie exploration.
 
 [![Screenshot-2024-01-16-092136.png](https://i.postimg.cc/LXpjpcsd/Screenshot-2024-01-16-092136.png)](https://postimg.cc/cKFv75YT)
 
